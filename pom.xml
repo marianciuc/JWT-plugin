@@ -5,13 +5,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>io.github.marianciuc.jwtplugin</groupId>
-    <artifactId>jwt-plugin</artifactId>
+    <artifactId>jwt-security</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
 
-    <name>JWT Plugin</name>
-    <description>A plugin for generating and validating JWT tokens</description>
+    <name>JWT Security</name>
+    <description>A library for generating and validating JWT tokens</description>
 
     <licenses>
         <license>
@@ -33,8 +33,8 @@
     <distributionManagement>
         <repository>
             <id>github</id>
-            <name>JWT Plugin</name>
-            <url>https://maven.pkg.github.com/marianciuc/JWT-plugin</url>
+            <name>JWT Security</name>
+            <url>https://maven.pkg.github.com/marianciuc/JWT-security</url>
         </repository>
     </distributionManagement>
 

@@ -1,7 +1,7 @@
-package io.github.marianciuc.jwtplugin;
+package io.github.marianciuc.jwtsecurity;
 
-import io.github.marianciuc.jwtplugin.exceptions.JwtSecurityException;
-import io.github.marianciuc.jwtplugin.service.JsonWebTokenService;
+import io.github.marianciuc.jwtsecurity.exceptions.JwtSecurityException;
+import io.github.marianciuc.jwtsecurity.service.JsonWebTokenService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

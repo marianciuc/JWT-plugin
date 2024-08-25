@@ -1,4 +1,4 @@
-package io.github.marianciuc.jwtplugin.entity;
+package io.github.marianciuc.jwtsecurity.entity;
 
 /**
  * Enumeration representing the type of token.

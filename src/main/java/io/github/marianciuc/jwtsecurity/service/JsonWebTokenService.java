@@ -1,8 +1,8 @@
-package io.github.marianciuc.jwtplugin.service;
+package io.github.marianciuc.jwtsecurity.service;
 
-import io.github.marianciuc.jwtplugin.entity.JwtUser;
-import io.github.marianciuc.jwtplugin.entity.TokenType;
-import io.github.marianciuc.jwtplugin.exceptions.*;
+import io.github.marianciuc.jwtsecurity.entity.JwtUser;
+import io.github.marianciuc.jwtsecurity.entity.TokenType;
+import io.github.marianciuc.jwtsecurity.exceptions.*;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.security.core.GrantedAuthority;
@@ -27,11 +27,11 @@ public class JsonWebTokenService {
     private static final String ROLE_SERVICE = "ROLE_SERVICE";
     private static final String ROLE_CLAIM = "ROLE";
     private static final String TOKEN_TYPE_CLAIM = "TOKEN_TYPE";
-    private static final String JWT_EXPIRED_MESSAGE = "JWT has expired";
-    private static final String UNSUPPORTED_JWT = "This JWT is not supported";
-    private static final String KEY_DECODING_ERROR = "Key decoding error: ";
-    private static final String TOKEN_MATCHING_ERROR = "Token does not match the request";
-    private static final String ROLE_ERROR = "The user does not have any roles";
+    private static final String JWT_EXPIRED_MESSAGE = "The provided JSON Web Token (JWT) has expired. Please request a new one.";
+    private static final String UNSUPPORTED_JWT = "The provided JWT is not supported. Please ensure you're using a supported JWT format.";
+    private static final String KEY_DECODING_ERROR = "There was an error attempting to decode the secret key: ";
+    private static final String TOKEN_MATCHING_ERROR = "The provided token does not match the token type specified in the request. Please provide a matching token.";
+    private static final String ROLE_ERROR = "No roles have been assigned to the user. Please assign at least one role to the user.";
     private final String secretKey;
     private final Long accessExpiration;
     private final Long refreshExpiration;
