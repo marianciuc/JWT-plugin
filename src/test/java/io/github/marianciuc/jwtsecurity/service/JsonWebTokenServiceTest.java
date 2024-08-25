@@ -1,7 +1,6 @@
-package io.github.marianciuc.jwtsecurity;
+package io.github.marianciuc.jwtsecurity.service;
 
 import io.github.marianciuc.jwtsecurity.exceptions.JwtSecurityException;
-import io.github.marianciuc.jwtsecurity.service.JsonWebTokenService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -29,6 +28,12 @@ public class JsonWebTokenServiceTest {
         service = new JsonWebTokenService(secret, accessExpiration, refreshExpiration);
     }
 
+    /**
+     * This method is used to test the generation of an access token.
+     * It creates a new instance of UserDetails using the provided subject and role.
+     * Then, it generates an access token based on the user details.
+     * Finally, it asserts that the generated token is not null and not empty.
+     */
     @Test
     public void testGenerateAccessToken() {
         UserDetails userDetails = service.create(SUBJECT, ROLE);
@@ -37,6 +42,13 @@ public class JsonWebTokenServiceTest {
         Assertions.assertFalse(token.isEmpty());
     }
 
+    /**
+     * This method is used to test the generation of a refresh token.
+     *
+     * It creates a new instance of UserDetails using the provided subject and role.
+     * Then, it generates a refresh token based on the user details.
+     * Finally, it asserts that the generated token is not null and not empty.
+     */
     @Test
     public void testGenerateRefreshToken() {
         UserDetails userDetails = service.create(SUBJECT, ROLE);
