@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.mv.jwtplugin</groupId>
+    <groupId>io.github.marianciuc.jwtplugin</groupId>
     <artifactId>jwt-plugin</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
@@ -21,11 +21,6 @@
         </license>
     </licenses>
 
-    <scm>
-        <connection>scm:git:git://github.com/marianciuc/JWT-plugin.git</connection>
-        <developerConnection>scm:git:ssh://github.com/marianciuc/JWT-plugin.git</developerConnection>
-        <url>https://github.com/marianciuc/JWT-plugin</url>
-    </scm>
 
     <developers>
         <developer>
@@ -37,8 +32,9 @@
 
     <distributionManagement>
         <repository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+            <id>github</id>
+            <name>GitHub Marianciuc Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/marianciuc/JWT-plugin</url>
         </repository>
     </distributionManagement>
 
