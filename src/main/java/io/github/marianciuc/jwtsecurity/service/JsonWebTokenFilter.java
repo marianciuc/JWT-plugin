@@ -13,6 +13,12 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
+
+/**
+ * The `JsonWebTokenFilter` class is a filter that is responsible for intercepting incoming requests,
+ * extracting the JSON Web Token (JWT) from the `Authorization` header, and authenticating the user
+ * based on the extracted token.
+ */
 public class JsonWebTokenFilter extends OncePerRequestFilter {
 
     private final static String BEARER_STR = "Bearer ";
