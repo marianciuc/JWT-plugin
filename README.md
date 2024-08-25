@@ -12,7 +12,7 @@ To use the JwtPlugin in your project, add the following dependency to your `pom.
 
 ```
 <dependency>
-  <groupId>io.github.marianciuc.jwtplugin</groupId>
+  <groupId>io.github.marianciuc</groupId>
   <artifactId>jwt-security</artifactId>
   <version>1.0-SNAPSHOT</version>
 </dependency>
