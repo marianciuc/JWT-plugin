@@ -1,5 +1,5 @@
-# JwtPlugin
-JwtPlugin is a Java library designed for generating, parsing, and validating JSON Web Tokens (JWTs). It provides a simple and secure way to manage authentication tokens in your Java applications, particularly in microservices environments.
+# JWT-Security
+Jwt-Security is a Java library designed for generating, parsing, and validating JSON Web Tokens (JWTs). It provides a simple and secure way to manage authentication tokens in your Java applications, particularly in microservices environments.
 ## Features
 - `JWT Generation`: Create secure access, refresh, and service tokens with customizable expiration times.
 - `Token Parsing`: Easily parse JWTs to retrieve user details, roles, and other claims.
@@ -13,7 +13,7 @@ To use the JwtPlugin in your project, add the following dependency to your `pom.
 ```
 <dependency>
   <groupId>io.github.marianciuc.jwtplugin</groupId>
-  <artifactId>jwt-plugin</artifactId>
+  <artifactId>jwt-security</artifactId>
   <version>1.0-SNAPSHOT</version>
 </dependency>
 ```
