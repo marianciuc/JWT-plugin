@@ -19,6 +19,6 @@ jobs:
         uses: actions/setup-java@v3
         with:
           distribution: 'adopt'
-          java-version: '16'
+          java-version: '21'
       - name: Testing the package
         run: mvn test
