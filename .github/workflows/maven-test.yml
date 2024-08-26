@@ -1,12 +1,11 @@
-name: Maven Test
+name: Run tests
 
 on:
-  push:
-    branches: [ main ]
+  workflow_dispatch:
 
 jobs:
  autotests:
-    name: Run tests and generate Allure Report
+    name: Run tests
     runs-on: ubuntu-latest
     steps:
       - name: Clone repository
