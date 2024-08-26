@@ -16,8 +16,7 @@ jobs:
         uses: actions/setup-java@v4.2.1
         with:
           java-version: 21
-          cache: 'maven'
           distribution: 'zulu'
 
       - name: Run Test
-        run: ./mvnw verify
+        run: mvn test
