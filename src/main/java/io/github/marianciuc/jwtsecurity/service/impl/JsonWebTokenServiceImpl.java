@@ -3,6 +3,7 @@ package io.github.marianciuc.jwtsecurity.service.impl;
 import io.github.marianciuc.jwtsecurity.entity.JwtUser;
 import io.github.marianciuc.jwtsecurity.enums.TokenType;
 import io.github.marianciuc.jwtsecurity.exceptions.*;
+import io.github.marianciuc.jwtsecurity.service.JsonWebTokenService;
 import io.github.marianciuc.jwtsecurity.service.JwtUserDetails;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
@@ -20,7 +21,7 @@ import static io.github.marianciuc.jwtsecurity.entity.JwtUser.ROLE_SERVICE;
  * @author Vladimir Marianciuc
  * @version 2.0
  */
-public class JsonWebTokenServiceImpl {
+public class JsonWebTokenServiceImpl implements JsonWebTokenService {
 
     private static final String ROLE_CLAIM = "ROLE";
     private static final String ID_CLAIM = "ID";
