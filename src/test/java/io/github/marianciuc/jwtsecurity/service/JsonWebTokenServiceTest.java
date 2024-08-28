@@ -47,7 +47,6 @@ public class JsonWebTokenServiceTest {
 
     /**
      * This method is used to test the generation of a refresh token.
-     *
      * It creates a new instance of UserDetails using the provided subject and role.
      * Then, it generates a refresh token based on the user details.
      * Finally, it asserts that the generated token is not null and not empty.
@@ -66,7 +65,7 @@ public class JsonWebTokenServiceTest {
         Assertions.assertNotNull(token);
         Assertions.assertFalse(token.isEmpty());
         UserDetails userDetails = service.parseAccessToken(token);
-        Assertions.assertEquals(SERVICE_NAME, userDetails.getUsername());
+        Assertions.assertEquals(ROLE_SERVICE, userDetails.getUsername());
         Assertions.assertEquals(ROLE_SERVICE, userDetails.getAuthorities().iterator().next().getAuthority());
     }
 
@@ -90,18 +89,18 @@ public class JsonWebTokenServiceTest {
     public void testParseAccessTokenWithRefreshToken() {
         JwtUserDetails userDetails = service.create(SUBJECT, ROLE, UUID.randomUUID(), TokenType.REFRESH_TOKEN);
         String token = service.generateRefreshToken(userDetails);
-        Assertions.assertThrows(JwtSecurityException.class, () -> {
-            service.parseAccessToken(token);
-        });
+        Assertions.assertThrows(JwtSecurityException.class, () ->
+                service.parseAccessToken(token)
+        );
     }
 
     @Test
     public void testParseRefreshTokenWithAccessToken() {
         JwtUserDetails userDetails = service.create(SUBJECT, ROLE, UUID.randomUUID(), TokenType.ACCESS_TOKEN);
         String token = service.generateAccessToken(userDetails);
-        Assertions.assertThrows(JwtSecurityException.class, () -> {
-            service.parseRefreshToken(token);
-        });
+        Assertions.assertThrows(JwtSecurityException.class, () ->
+                service.parseRefreshToken(token)
+        );
     }
 
     @AfterEach

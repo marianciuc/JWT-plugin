@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentMatchers;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
@@ -19,7 +20,6 @@ import org.springframework.http.HttpHeaders;
 import java.io.IOException;
 import java.util.UUID;
 
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 public class JsonWebTokenFilterTest {
@@ -72,7 +72,7 @@ public class JsonWebTokenFilterTest {
 
         jsonWebTokenFilter.doFilterInternal(request, response, chain);
 
-        verify(jsonWebTokenService, never()).parseAccessToken(any(String.class));
+        verify(jsonWebTokenService, never()).parseAccessToken(ArgumentMatchers.any(String.class));
         verify(chain).doFilter(request, response);
     }
 }

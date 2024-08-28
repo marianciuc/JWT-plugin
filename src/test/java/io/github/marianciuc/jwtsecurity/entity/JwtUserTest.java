@@ -31,8 +31,6 @@ public class JwtUserTest {
 
     /**
      * Checks if the User is a Service.
-     *
-     * @return true if the User is a Service, else false.
      */
     @Test
     public void testIsService_whenRoleIsNull_returnsFalse() {
