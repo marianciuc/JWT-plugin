@@ -68,6 +68,12 @@
             <artifactId>spring-test</artifactId>
             <version>6.1.10</version>
             <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.junit.vintage</groupId>
+                    <artifactId>junit-vintage-engine</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -104,7 +110,6 @@
             <artifactId>spring-security-web</artifactId>
             <version>6.3.3</version>
         </dependency>
-
     </dependencies>
 
     <build>
