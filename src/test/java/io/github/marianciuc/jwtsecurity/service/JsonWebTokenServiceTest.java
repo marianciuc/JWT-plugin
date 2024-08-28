@@ -64,8 +64,8 @@ public class JsonWebTokenServiceTest {
         String token = service.generateServiceToken();
         Assertions.assertNotNull(token);
         Assertions.assertFalse(token.isEmpty());
-        UserDetails userDetails = service.parseAccessToken(token);
-        Assertions.assertEquals(ROLE_SERVICE, userDetails.getUsername());
+        JwtUserDetails userDetails = service.parseAccessToken(token);
+        Assertions.assertEquals(ROLE_SERVICE, userDetails.getRole());
         Assertions.assertEquals(ROLE_SERVICE, userDetails.getAuthorities().iterator().next().getAuthority());
     }
 
