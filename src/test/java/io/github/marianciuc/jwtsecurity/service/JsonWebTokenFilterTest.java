@@ -7,6 +7,7 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -35,13 +36,21 @@ public class JsonWebTokenFilterTest {
     private HttpServletResponse response;
     private FilterChain chain;
 
+    private AutoCloseable closeable;
+
+
     @BeforeEach
     public void setup() {
-        MockitoAnnotations.initMocks(this);
+        closeable = MockitoAnnotations.openMocks(this);
         jsonWebTokenFilter = new JsonWebTokenFilter(jsonWebTokenService, userService);
         request = Mockito.mock(HttpServletRequest.class);
         response = Mockito.mock(HttpServletResponse.class);
         chain = Mockito.mock(FilterChain.class);
+    }
+
+    @AfterEach
+    public void closeMocks() throws Exception {
+        closeable.close();
     }
 
     @Test
