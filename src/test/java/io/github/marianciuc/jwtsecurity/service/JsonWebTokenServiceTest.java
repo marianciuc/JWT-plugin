@@ -1,6 +1,8 @@
 package io.github.marianciuc.jwtsecurity.service;
 
+import io.github.marianciuc.jwtsecurity.enums.TokenType;
 import io.github.marianciuc.jwtsecurity.exceptions.JwtSecurityException;
+import io.github.marianciuc.jwtsecurity.service.impl.JsonWebTokenServiceImpl;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,18 +16,19 @@ public class JsonWebTokenServiceTest {
 
     private final static String SUBJECT = "SUBJECT";
     private final static String ROLE = "ROLE";
-    private final static String SERVICE = "SERVICE";
     private static final String ROLE_SERVICE = "ROLE_SERVICE";
     private static final Long accessExpiration = 3600000L;
     private static final Long refreshExpiration = 3600000L;
-    private JsonWebTokenService service;
+    private static final String SERVICE_NAME = "SERVICE_NAME";
+
+    private JsonWebTokenServiceImpl service;
 
     @BeforeEach
     public void setUp() {
         UUID uuid = UUID.randomUUID();
         byte[] bytes = uuid.toString().getBytes();
         String secret = Base64.getEncoder().encodeToString(bytes);
-        service = new JsonWebTokenService(secret, accessExpiration, refreshExpiration);
+        service = new JsonWebTokenServiceImpl(SERVICE_NAME, secret, accessExpiration, refreshExpiration);
     }
 
     /**
@@ -36,7 +39,7 @@ public class JsonWebTokenServiceTest {
      */
     @Test
     public void testGenerateAccessToken() {
-        UserDetails userDetails = service.create(SUBJECT, ROLE);
+        JwtUserDetails userDetails = service.create(SUBJECT, ROLE, UUID.randomUUID(), TokenType.ACCESS_TOKEN);
         String token = service.generateAccessToken(userDetails);
         Assertions.assertNotNull(token);
         Assertions.assertFalse(token.isEmpty());
@@ -51,7 +54,7 @@ public class JsonWebTokenServiceTest {
      */
     @Test
     public void testGenerateRefreshToken() {
-        UserDetails userDetails = service.create(SUBJECT, ROLE);
+        JwtUserDetails userDetails = service.create(SUBJECT, ROLE, UUID.randomUUID(), TokenType.REFRESH_TOKEN);
         String token = service.generateRefreshToken(userDetails);
         Assertions.assertNotNull(token);
         Assertions.assertFalse(token.isEmpty());
@@ -63,13 +66,13 @@ public class JsonWebTokenServiceTest {
         Assertions.assertNotNull(token);
         Assertions.assertFalse(token.isEmpty());
         UserDetails userDetails = service.parseAccessToken(token);
-        Assertions.assertEquals(SERVICE, userDetails.getUsername());
+        Assertions.assertEquals(SERVICE_NAME, userDetails.getUsername());
         Assertions.assertEquals(ROLE_SERVICE, userDetails.getAuthorities().iterator().next().getAuthority());
     }
 
     @Test
     public void testParseAccessToken() {
-        UserDetails userDetails = service.create(SUBJECT, ROLE);
+        JwtUserDetails userDetails = service.create(SUBJECT, ROLE, UUID.randomUUID(), TokenType.ACCESS_TOKEN);
         String token = service.generateAccessToken(userDetails);
         UserDetails parsedDetails = service.parseAccessToken(token);
         Assertions.assertEquals(userDetails.getUsername(), parsedDetails.getUsername());
@@ -77,7 +80,7 @@ public class JsonWebTokenServiceTest {
 
     @Test
     public void testParseRefreshToken() {
-        UserDetails userDetails = service.create(SUBJECT, ROLE);
+        JwtUserDetails userDetails = service.create(SUBJECT, ROLE, UUID.randomUUID(), TokenType.REFRESH_TOKEN);
         String token = service.generateRefreshToken(userDetails);
         UserDetails parsedDetails = service.parseRefreshToken(token);
         Assertions.assertEquals(userDetails.getUsername(), parsedDetails.getUsername());
@@ -85,7 +88,7 @@ public class JsonWebTokenServiceTest {
 
     @Test
     public void testParseAccessTokenWithRefreshToken() {
-        UserDetails userDetails = service.create(SUBJECT, ROLE);
+        JwtUserDetails userDetails = service.create(SUBJECT, ROLE, UUID.randomUUID(), TokenType.REFRESH_TOKEN);
         String token = service.generateRefreshToken(userDetails);
         Assertions.assertThrows(JwtSecurityException.class, () -> {
             service.parseAccessToken(token);
@@ -94,7 +97,7 @@ public class JsonWebTokenServiceTest {
 
     @Test
     public void testParseRefreshTokenWithAccessToken() {
-        UserDetails userDetails = service.create(SUBJECT, ROLE);
+        JwtUserDetails userDetails = service.create(SUBJECT, ROLE, UUID.randomUUID(), TokenType.ACCESS_TOKEN);
         String token = service.generateAccessToken(userDetails);
         Assertions.assertThrows(JwtSecurityException.class, () -> {
             service.parseRefreshToken(token);
