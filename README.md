@@ -8,36 +8,61 @@ Jwt-Security is a Java library designed for generating, parsing, and validating 
 - `Role-Based Authentication`: Generate and parse tokens that include user roles.
 
 ## Installation
+### Add the Dependency
 To use the JwtPlugin in your project, add the following dependency to your `pom.xml` after publishing it to Maven Central or your private repository:
 
 ```
 <dependency>
   <groupId>io.github.marianciuc</groupId>
   <artifactId>jwt-security</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.4.1</version>
 </dependency>
 ```
-## Usage
 
-### 1. Initialization
-To create an instance of JsonWebTokenService, you need to provide the secretKey, accessExpiration, and refreshExpiration:
+### 2. Configure the Library
+Create a configuration class in your Spring Boot project to set up the JWT service:
+
 ```JAVA
-JsonWebTokenService jwtService = new JsonWebTokenService("your-secret-key encoded by base64",3600000L,86400000L);
+@Configuration
+public class JwtConfig {
+
+    @Value("${security.jwt.token.accessExpiration}")
+    private Long accessExpiration;
+
+    @Value("${security.jwt.token.refreshExpiration}")
+    private Long refreshExpiration;
+
+    @Value("${security.jwt.token.secret-key}")
+    private String secretKey;
+
+    @Value("${spring.application.name}")
+    private String serviceName;
+
+    @Bean
+    public JsonWebTokenService jsonWebTokenService() {
+        return new JsonWebTokenServiceImpl(serviceName, secretKey, accessExpiration, refreshExpiration);
+    }
+
+    @Bean
+    public JsonWebTokenFilter jsonWebTokenFilter(JsonWebTokenService jsonWebTokenService, UserService userService) {
+        return new JsonWebTokenFilter(jsonWebTokenService, userService);
+    }
+
+    @Bean
+    public UserService userService() {
+        return new UserServiceImpl();
+    }
+}
+
 ```
-### 2. Generating Tokens
-#### Generate Access Token
-```java
-UserDetails userDetails = jwtService.create("username", "ROLE_USER");
-String accessToken = jwtService.generateAccessToken(userDetails);
+### 2. Set the Required Properties
+Add the following properties to your application.properties or application.yml file:
+
 ```
-#### Generate Refresh Token
-```java
-String refreshToken = jwtService.generateRefreshToken(userDetails);
-```
-#### Generate Service Token
-For internal microservice communication:
-```java
-String serviceToken = jwtService.generateServiceToken();
+security.jwt.token.accessExpiration=3600000 # 1 hour
+security.jwt.token.refreshExpiration=86400000 # 1 day
+security.jwt.token.secret-key=YourSecretKey encoded by base64 encoder
+spring.application.name=YourServiceName
 ```
 
 ## Contributing
