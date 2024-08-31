@@ -77,8 +77,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
             .csrf().disable()
             .authorizeRequests()
-                .antMatchers("/public/**").permitAll() // Public endpoints
-                .anyRequest().authenticated() // All other requests require authentication
+                .antMatchers("/public/**").permitAll()
+                .anyRequest().authenticated()
             .and()
             .addFilterBefore(jsonWebTokenFilter(jsonWebTokenService(), userService()), UsernamePasswordAuthenticationFilter.class);
     }
