@@ -3,7 +3,6 @@ JWT-Security is a Java library designed to simplify the generation and validatio
 ## Features
 - `JWT Generation`:  Create customizable tokens with expiration times, user roles, and additional claims.
 - `Token Parsing`: Easily parse JWTs to retrieve user details, roles, and other claims.
-- `Validation`: Validate tokens to ensure they haven't expired or been tampered with.
 - `Spring Security Integration`: Seamlessly integrates with Spring Security’s UserDetails for user management.
 - `Role-Based Authentication`: Generate and parse tokens that include user roles.
 - `Decentralized Token Verification`: Independent token validation across microservices for better performance and scalability.
